@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Witnesses | Exhibition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 15px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0 20px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 25px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #777;
+            font-weight: 300;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .item-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            max-width: 90%;
+            margin: 40px auto;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            position: relative;
+            padding: 15px;
+            background: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .modal-title {
+            font-size: 22px;
+            font-weight: 400;
+            margin: 0;
+            padding-right: 30px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            color: #777;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-image {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .story {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                margin: 20px auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Silent Witnesses</h1>
+            <p class="subtitle">Stories told through hands that speak without words</p>
+        </header>
+        
+        <div class="gallery">
+            <!-- Image 1 -->
+            <div class="gallery-item" onclick="openModal(1)">
+                <img src="01.jpg" alt="Silent Witness 1">
+                <div class="item-number">1</div>
+            </div>
+            
+            <!-- Image 2 -->
+            <div class="gallery-item" onclick="openModal(2)">
+                <img src="02.jpg" alt="Silent Witness 2">
+                <div class="item-number">2</div>
+            </div>
+            
+            <!-- Image 3 -->
+            <div class="gallery-item" onclick="openModal(3)">
+                <img src="03.jpg" alt="Silent Witness 3">
+                <div class="item-number">3</div>
+            </div>
+            
+            <!-- Image 4 -->
+            <div class="gallery-item" onclick="openModal(4)">
+                <img src="04.jpg" alt="Silent Witness 4">
+                <div class="item-number">4</div>
+            </div>
+            
+            <!-- Image 5 -->
+            <div class="gallery-item" onclick="openModal(5)">
+                <img src="05.jpg" alt="Silent Witness 5">
+                <div class="item-number">5</div>
+            </div>
+            
+            <!-- Image 6 -->
+            <div class="gallery-item" onclick="openModal(6)">
+                <img src="06.jpg" alt="Silent Witness 6">
+                <div class="item-number">6</div>
+            </div>
+            
+            <!-- Image 7 -->
+            <div class="gallery-item" onclick="openModal(7)">
+                <img src="07.jpg" alt="Silent Witness 7">
+                <div class="item-number">7</div>
+            </div>
+            
+            <!-- Image 8 -->
+            <div class="gallery-item" onclick="openModal(8)">
+                <img src="08.jpg" alt="Silent Witness 8">
+                <div class="item-number">8</div>
+            </div>
+            
+            <!-- Image 9 -->
+            <div class="gallery-item" onclick="openModal(9)">
+                <img src="09.jpg" alt="Silent Witness 9">
+                <div class="item-number">9</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Exhibition &copy; 2025 | Diego Babino</p>
+        </footer>
+    </div>
+    
+    <!-- Modal for each image -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Image Title</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="modal-image" class="modal-image" src="" alt="">
+                <div id="story" class="story">
+                    <!-- Story content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Stories for each image
+        const stories = {
+            1: {
+                title: "Two Legacies",
+                content: "His hands carry two legacies. On one, the Freemason’s ring, discreet and heavy with secrets. On the other, the band engraved with his father’s initials, C.S., which he had seen gleam on other fingers before his own. Every crease in his skin holds the memory of inherited gestures: silences, discipline, pride. He does not speak of what he has lost, nor of what he still guards. Yet in the golden light that brushes the shine of his rings, one can sense the weight of a story larger than his own life."
+            },
+            2: {
+                title: "The Garden at Dawn",
+                content: "Naomé opens the door before dawn and steps into the garden. Her husband is still asleep, the children are far away, and silence weighs a little on the house. But here, among the roses and wild herbs, she breathes. Every movement every pruning, every gathering of leaves is a quiet conversation with the earth. The garden becomes her refuge, a world of her own where time slows down and solitude feels less heavy."
+            },
+            3: {
+                title: "A Bridge of Hands",
+                content: "The child nestles against her, unaware of all that her hands have carried: sleepless nights, stories, unspoken worries. She feels time slipping across her skin, tender and fragile at once. Soon, she will no longer be able to protect him as she does today, but for now, their hands reach for each other and meet a bridge between yesterday and tomorrow."
+            },
+            4: {
+                title: "Concrete and the Future",
+                content: "The construction site hums around Rafael, hammers and drills beating in rhythm. With his colleague, he talks about his wife’s imminent delivery, the baby that will change everything. Each day feels heavier, each task more pressing: he already senses on his shoulders the weight of feeding and protecting his family. In the street, passersby hurry past without noticing him, and there, amid the dust and concrete, he pictures the future he will have to build."
+            },
+            5: {
+                title: "The Black Star",
+                content: "The tattoo on his left arm has faded with the years, but not the memory. A black star, inked on a July night when everything seemed possible. “To guide us,” Maxime had said with a laugh, before leaving for the worksite that was supposed to change their lives."
+            },
+            6: {
+                title: "The Orphaned Ring",
+                content: "Time had left its marks on his skin, veined with blue and etched with deep lines. On his finger, the wedding ring still gleamed, witness to a love now orphaned. His wife had been gone for years, yet he still wore it, a quiet presence lingering in every movement. The newspaper rested beneath his hand, a sign of a fragile routine. And yet, behind the printed lines, his thoughts drifted toward her, into that space where memories take the place of tomorrow."
+            },
+            7: {
+                title: "The Lobby Plant",
+                content: "The wind had knocked over the plant in the lobby, and it was up to him to set it upright again. His hand closed around the blue handle of the tool, firm, precise. Every stiff joint told of years spent tending the building, fixing the small disasters no one truly noticed. He crouched down, pressed the soil back around the roots, adjusted the plant so it could stand tall once more. Yet in that simple gesture, he was gathering up the crumbs of the world, the things no one else wished to touch."
+            },
+            8: {
+                title: "Hands of Survival",
+                content: "Her hands were worn and dirty, as if every crease carried the weight of the miles she had traveled. She had just arrived in Switzerland, and in that simple gesture of extending her palms to the world lay the fragile hope of a little money just enough for a roof, for shelter. Every passerby’s glance slid past her, yet her hands already told a story of courage, solitude, and survival."
+            },
+            9: {
+                title: "The Treasure Map",
+                content: "He holds the map like a treasure, his trembling hands searching for that small village where they first met. “Are you sure it’s this way?” she whispers, worried to see him so intent on those blurred lines. Sixty years after their first date, they are still trying to find that café by the lake."
+            }
+        };
+        
+        function openModal(imageNumber) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalImage = document.getElementById('modal-image');
+            const storyContent = document.getElementById('story');
+            
+            const story = stories[imageNumber];
+            
+            modalTitle.textContent = story.title;
+            // Fix: Format the image number to match your file naming convention (01.jpg, 02.jpg, etc.)
+            modalImage.src = `${imageNumber.toString().padStart(2, '0')}.jpg`;
+            modalImage.alt = story.title;
+            storyContent.textContent = story.content;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
